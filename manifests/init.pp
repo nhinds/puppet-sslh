@@ -10,29 +10,16 @@
 # [*listen_address*]
 #   The address and port that sslh should listen on. Defaults to '0.0.0.0:443'
 #
-# [*ssh_address*]
-#   The address and port that sslh should forward SSH connections to.
-#
-# [*ssl_address*]
-#   The address and port that sslh should forward SSL/HTTPS connections to.
-#
-# [*openvpn_address*]
-#   The address and port that sslh should forward OpenVPN connections to.
-#
-# [*http_address*]
-#   The address and port that sslh should forward HTTP connections to.
-#
-# [*xmpp_address*]
-#   The address and port that sslh should forward XMPP connections to.
-#
-# [*tinc_address*]
-#   The address and port that sslh should forward tinc connections to.
-#
 # === Examples
 #
-#  class { sslh:
-#    ssh_address => 'localhost:22',
-#    openvpn_address => 'localhost:1194',
+#  include sslh
+#
+#  sslh::destination { ssh:
+#    address => 'localhost:22',
+#  }
+#
+#  sslh::destination { openvpn:
+#    address => '1.2.3.4:1194',
 #  }
 #
 # === Copyright
@@ -59,11 +46,23 @@ class sslh(
     require => Package[sslh],
   }
 
-  # Uses: $listen_address, $ssh_address, $ssl_address, $openvpn_address,
-  # $http_address, $xmpp_address, $tinc_address
-  file { '/etc/default/sslh':
-    content => template('sslh/sslh.defaults.erb'),
-    require => Package[sslh],
-    notify  => Service[sslh],
+  concat { '/etc/default/sslh':
+    ensure_newline => false,
+    require        => Package[sslh],
+    notify         => Service[sslh],
+  }
+
+  # Uses: $listen_address
+  concat::fragment { 'sslh-header':
+    target  => '/etc/default/sslh',
+    content => template('sslh/sslh.defaults.header.erb'),
+    order   => 01,
+  }
+
+  # Uses: none
+  concat::fragment { 'sslh-footer':
+    target  => '/etc/default/sslh',
+    content => template('sslh/sslh.defaults.footer.erb'),
+    order   => 99,
   }
 }

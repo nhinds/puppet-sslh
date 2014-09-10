@@ -1,0 +1,9 @@
+# Default options for sslh initscript
+# sourced by /etc/init.d/sslh
+
+RUN=yes
+
+# binary to use: forked (sslh) or single-thread (sslh-select) version
+DAEMON=/usr/sbin/sslh
+
+DAEMON_OPTS="--user sslh --listen <%= @listen_address -%>

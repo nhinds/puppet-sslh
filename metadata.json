@@ -1,0 +1,12 @@
+{
+  "name": "nhinds-sslh",
+  "version": "1.0",
+  "author": "Nicholas Hinds",
+  "license": "Apache 2.0",
+  "summary": "Installs and configures sslh on ubuntu systems",
+  "source": "https://github.com/nhinds/puppet-sslh",
+  "dependencies": [
+    { "name": "puppetlabs/concat", "version_requirement": ">=1.0.4" },
+    { "name": "puppetlabs/stdlib", "version_requirement": ">=4.3.2" }
+  ]
+}
