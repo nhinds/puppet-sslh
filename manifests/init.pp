@@ -10,6 +10,12 @@
 # [*listen_address*]
 #   The address and port that sslh should listen on. Defaults to '0.0.0.0:443'
 #
+# [*timeout*]
+#   Seconds to wait before connecting to --on-timeout address.
+#
+# [*on_timeout*]
+#   Connect to specified address upon timeout.
+#
 # === Examples
 #
 #  include sslh
@@ -29,6 +35,8 @@
 class sslh(
   $package_version = 'present',
   $listen_address  = '0.0.0.0:443',
+  $timeout         = undef,
+  $on_timeout      = undef,
   $ssh_address     = undef,
   $ssl_address     = undef,
   $openvpn_address = undef,
