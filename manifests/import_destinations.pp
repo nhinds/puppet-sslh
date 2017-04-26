@@ -14,6 +14,6 @@
 #
 # Copyright 2014 Nicholas Hinds, unless otherwise noted.
 #
-class sslh::import_destinations() {
-	Sslh::Destination<<| |>>
+class sslh::import_destinations {
+  Sslh::Destination <<| |>>
 }

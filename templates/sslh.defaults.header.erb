@@ -6,4 +6,4 @@ RUN=yes
 # binary to use: forked (sslh) or single-thread (sslh-select) version
 DAEMON=/usr/sbin/sslh
 
-DAEMON_OPTS="--user sslh --listen <%= @listen_address -%> <% if @timeout %> -t <%= @timeout -%> <% end %> <% if @on_timeout %> --on-timeout <%= @on_timeout -%> <% end %>
+DAEMON_OPTS="--user sslh --listen <%= @listen_address.to_s -%> <% if @timeout %> -t <%= @timeout.to_s -%> <% end %> <% if @on_timeout %> --on-timeout <%= @on_timeout.to_s -%> <% end %>
