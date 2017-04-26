@@ -32,7 +32,7 @@
 #
 # Copyright 2014 Nicholas Hinds, unless otherwise noted.
 #
-class sslh(
+class sslh (
   $package_version = 'present',
   $listen_address  = '0.0.0.0:443',
   $timeout         = undef,
@@ -44,27 +44,27 @@ class sslh(
   $xmpp_address    = undef,
   $tinc_address    = undef,
 ) {
-  package { sslh:
+  package { 'sslh':
     ensure => $package_version,
   }
 
-  service { sslh:
+  service { 'sslh':
     ensure  => running,
     enable  => true,
-    require => Package[sslh],
+    require => Package['sslh'],
   }
 
   concat { '/etc/default/sslh':
     ensure_newline => false,
-    require        => Package[sslh],
-    notify         => Service[sslh],
+    require        => Package['sslh'],
+    notify         => Service['sslh'],
   }
 
   # Uses: $listen_address
   concat::fragment { 'sslh-header':
     target  => '/etc/default/sslh',
     content => template('sslh/sslh.defaults.header.erb'),
-    order   => 01,
+    order   => '01',
   }
 
   # Uses: none
