@@ -58,7 +58,7 @@ define sslh::destination (
   }
 
   # Uses: $type, $address
-  concat::fragment {"sslh-destination-${type}":
+  concat::fragment {"sslh-destination-${title}":
     target  => '/etc/default/sslh',
     content => template('sslh/sslh.defaults.destination.erb'),
     order   => $order_real,
