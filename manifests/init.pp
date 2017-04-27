@@ -8,7 +8,7 @@
 #   Specify the version of sslh to install. Defaults to 'present'
 #
 # [*listen_address*]
-#   The address and port that sslh should listen on. Defaults to '0.0.0.0:443'
+#   The address and port that sslh should listen on. May be an array. Defaults to '0.0.0.0:443'
 #
 # [*timeout*]
 #   Seconds to wait before connecting to --on-timeout address.

@@ -15,4 +15,4 @@ RUN=yes
 # systemd users: don't forget to modify /lib/systemd/system/sslh.service
 DAEMON=/usr/sbin/sslh
 
-DAEMON_OPTS="--user sslh<% @listen_address.to_a.each do |address| -%> --listen <%= address.to_s -%><% end -%><% if @timeout -%> -t <%= @timeout.to_s -%><% end -%><% if @on_timeout -%> --on-timeout <%= @on_timeout.to_s -%><% end -%>
+DAEMON_OPTS="--user sslh<% Array(@listen_address).each do |address| -%> --listen <%= address.to_s -%><% end -%><% if @timeout -%> -t <%= @timeout.to_s -%><% end -%><% if @on_timeout -%> --on-timeout <%= @on_timeout.to_s -%><% end -%>
